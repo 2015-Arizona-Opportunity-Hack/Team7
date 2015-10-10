@@ -1,4 +1,9 @@
 <ion-view view-title="Chandler Food Bank">
+    <ion-nav-buttons side="right">
+      <button class="button button-icon" ng-click="login()">
+        Login         
+    </button>
+    </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">

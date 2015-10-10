@@ -1,7 +1,7 @@
 angular.module('starter.controller.home', [])
 .controller('HomeController', function ($scope) {
 	 $scope.playlists = [
-    { title: 'Reggae', id: 1 },
+    { title: 'Get Food', id: 1 },
     { title: 'Chill', id: 2 },
     { title: 'Dubstep', id: 3 },
     { title: 'Indie', id: 4 },

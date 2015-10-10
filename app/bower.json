@@ -3,5 +3,10 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.0"
+  },
+  "dependencies": {
+    "moment": "~2.10.6",
+    "angular-cache": "~4.3.2",
+    "angular-jwt": "~0.0.9"
   }
 }

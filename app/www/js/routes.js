@@ -17,7 +17,15 @@ angular.module('starter.routes', [])
       }
     }
   })
-
+	  .state('app.getfoodpersondetails', {
+		  url: '/getfooddetails',
+		  views: {
+			  'menuContent': {
+				  templateUrl: 'templates/getfood/getfoodpersondetails.html'
+			  }
+		  }
+	  })
+  
   .state('app.browse', {
       url: '/browse',
       views: {

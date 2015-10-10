@@ -1,5 +1,5 @@
 angular.module('starter.controller.app', [])
-	.controller('AppController', function ($scope, $ionicModal, $timeout) {
+	.controller('AppController', function ($scope, $ionicModal, $timeout, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -31,11 +31,12 @@ angular.module('starter.controller.app', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-
+	
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
+    $timeout(function () {
+		$scope.closeLogin();
+  		$state.go("app.getfoodpersondetails");
     }, 1000);
   };
 })
