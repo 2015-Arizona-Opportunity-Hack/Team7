@@ -82,6 +82,19 @@
           }
         }
       })
+      .state('clients',{
+        parent: 'admin',
+        abstract: true,
+        url: '/clients',
+        template: '<div ui-view></div>'
+      })
+
+      .state('clients.create',{
+        url: '/create',
+        templateUrl: 'app/clients/clients-create.html',
+        controller: 'ClientsCreateController',
+        controllerAs: 'clients'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'app/login/login.html',
