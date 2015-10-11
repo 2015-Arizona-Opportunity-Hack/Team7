@@ -54,6 +54,11 @@
         url: '/seniors',
         templateUrl: 'app/seniors/seniors.html'
       })
+      .state('eventlist', {
+        parent: 'main',
+        url: '/eventlist',
+        templateUrl: 'app/eventlist/eventlist.html'
+      })
       .state('admin', {
         abstract: true,
         url: '/admin',

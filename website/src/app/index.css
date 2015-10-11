@@ -55,6 +55,13 @@
   width: 24px;
 }
 
+.nav.navbar-nav > li > a > img.user-avatar {
+  margin-top: -14px;
+  top: 6px;
+  position: relative;
+  width: 32px;
+}
+
 .navbar-brand > img {
   display: inline-block;
   width: 28px;
@@ -110,6 +117,10 @@
 
 .margin-top-100 {
   margin-top: 100px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
 }
 
 .margin-bottom-40 {

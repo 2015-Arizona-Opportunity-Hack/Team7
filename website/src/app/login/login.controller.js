@@ -8,6 +8,7 @@
   /** @ngInject */
   function LoginController($state, authHelper) {
     var vm = this;
+    vm.error = null;
 
     vm.register = function() {
       auth.register(vm.user).then(function() {

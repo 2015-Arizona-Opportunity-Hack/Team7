@@ -1,19 +1,6 @@
-<div class="top-bar margin-bottom-70">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="link-group">
-          <a href="#/foodbank"><img src="/assets/images/foodbankplate-small.png"></a>
-          <a href="#/family"><img src="/assets/images/familylogo-small.png"></a>
-          <a href="#/community"><img src="/assets/images/rentaltext-small.png"></a>
-          <a href="#/ihelp"><img src="/assets/images/ihelpicon-small.png"></a>
-          <a href="#/seniors"><img src="/assets/images/senioricon-small.png"></a>
-          <button class="btn btn-success pull-right margin-top-5" ui-sref="logout">Logout</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div ng-include="'app/templates/header.html'"></div>
 
-<div ui-view></div>
+<div ui-view class="main-view"></div>
+
+<div ng-include="'app/templates/footer.html'"></div>
 
