@@ -29,6 +29,9 @@ angular.module('starter.routes', [])
 					  },
 					  eventsObj: function (eventsArr, eventsHelper) {
 						  return eventsHelper.convertToDateMappedObj(eventsArr);
+					  },
+					  dateListObj: function (eventsHelper) {
+						  return eventsHelper.getDateList();
 					  }
 				  }
 			  }

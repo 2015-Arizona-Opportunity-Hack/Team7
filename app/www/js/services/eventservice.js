@@ -127,6 +127,7 @@ angular.module('starter.factories', [])
 .factory('eventsHelper', function () {
 	var service = {
 		convertToDateMappedObj: convertToDateMappedObj,
+		getDateList: getDateList
 	};
 
 	return service;
@@ -144,5 +145,30 @@ angular.module('starter.factories', [])
 		return eventsObj;
 	}
 	
+	function getDateList() {
+		var weekObj = {};
+		for (var index = 0; index < 4; index++) {
+			var week = moment().add('w', index),
+				begin = week.startOf('isoweek');
+				
+				weekObj[index] = {
+					'start': begin.format('M-D-YYYY'),
+				
+					'days': []
+				};
+				for (var dayIndex = 0; dayIndex < 5; dayIndex++){
+					console.log(begin.format('YYYY-M-D'));
+					weekObj[index].days.push(begin.format('YYYY-M-D'));
+					begin.add('d', 1);					
+				}
+				
+				weekObj[index].end = begin.format('M-D-YYYY');
+				 
+		}
+		
+		console.log(weekObj);
+		return weekObj;	
+	}
 	
+		
 })
