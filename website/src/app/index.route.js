@@ -29,7 +29,7 @@
         url: '/donatefood',
         templateUrl: 'app/donate/donatefood.html'
       })
-	  .state('donatemoney', {
+		.state('donatemoney', {
         parent: 'main',
         url: '/donatemoney',
         templateUrl: 'app/donate/donatemoney.html'
