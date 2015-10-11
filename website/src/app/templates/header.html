@@ -1,0 +1,73 @@
+<header class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3"
+                ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs" href="#/"><img src="/assets/images/logo-only.png"></a>
+      </div>
+      <nav class="hidden-xs">
+        <ul class="nav navbar-nav">
+          <a href="#/" role="button" class="navbar-brand">
+            <img src="/assets/images/logo-only.png"> Chandler Food Bank
+          </a>
+          <li class="dropdown" dropdown>
+            <a role="button" class="dropdown-toggle" dropdown-toggle>
+              Our Services <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/foodbank"><img src="/assets/images/foodbankplate-small.png"> Food Bank</a></li>
+              <li><a href="#/family"><img src="/assets/images/familylogo-small.png"> Family</a></li>
+              <li><a href="#/community"><img src="/assets/images/rentaltext-small.png"> Rental Assistance</a></li>
+              <li><a href="#/ihelp"><img src="/assets/images/rentaltext-small.png"> iHelp</a></li>
+              <li><a href="#/seniors"><img src="/assets/images/senioricon-small.png"> Seniors</a></li>
+            </ul>
+          </li>
+          <li><a href="#/eventlist">Events</a></li>
+          <li><a href="">Support</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Contact</a></li>
+          <li><a href="">Jobs</a></li>
+        </ul>
+        <ul ng-if="$root.user" class="nav navbar-nav navbar-right">
+          <li class="dropdown" dropdown>
+            <a href="" dropdown-toggle><img src="assets/images/avatar.png" class="user-avatar" >
+              {{$root.user.firstName}} {{$root.user.lastName}} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="logout">Logout</a></li>
+              <!--<li><a href="#">Another action</a></li>-->
+              <!--<li><a href="#">Something else here</a></li>-->
+              <!--<li role="separator" class="divider"></li>-->
+              <!--<li><a href="#">Separated link</a></li>-->
+            </ul>
+          </li>
+        </ul>
+        <div ng-if="!$root.user" class="nav navbar-nav navbar-right">
+          <button class="btn btn-success pull-right margin-top-5" ui-sref="login">Login</button>
+        </div>
+      </nav>
+
+      <nav class="visible-xs" collapse="!isCollapsed" style="overflow: hidden;">
+        <ul class="nav navbar-nav">
+          <li><a href="#/foodbank" ng-click="isCollapsed = !isCollapsed;"><img
+            src="/assets/images/foodbankplate-small.png"> Food Bank</a></li>
+          <li><a href="#/family" ng-click="isCollapsed = !isCollapsed;"><img src="/assets/images/familylogo-small.png">
+            Family</a></li>
+          <li><a href="#/community" ng-click="isCollapsed = !isCollapsed;"><img
+            src="/assets/images/rentaltext-small.png"> Rental Assistance</a></li>
+          <li><a href="#/ihelp" ng-click="isCollapsed = !isCollapsed;"><img src="/assets/images/rentaltext-small.png">
+            iHelp</a></li>
+          <li><a href="#/seniors" ng-click="isCollapsed = !isCollapsed;"><img src="/assets/images/senioricon-small.png">
+            Seniors</a></li>
+          <li><a href="#/logout" ng-click="isCollapsed = !isCollapsed;">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
