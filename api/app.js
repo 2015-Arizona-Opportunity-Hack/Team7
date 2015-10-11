@@ -17,18 +17,9 @@ var http = require('http'),
   helmet = require('helmet');
 
 var env = process.env.NODE_ENV || 'development';
-var srcPath = (false && 'production' == env) ? __dirname : __dirname + '/src';
+var srcPath = __dirname + '/src';
 
 var app = module.exports = exports.app = express();
-
-// Redirect all HTTP requests to HTTPS
-app.all('*', function(req, res, next) {
-  if (true || req.secure || env !== 'production') {
-    // OK, continue
-    return next();
-  }
-  res.redirect('https://' + req.host + req.url);
-});
 
 app.set('showStackError', true);
 
@@ -153,7 +144,7 @@ app.all('*', function(req, res) {
 
 // Start server
 var port = {
-  http: ('production' == env) ? 80 : (process.env.PORT > 0 ? process.env.PORT : 3010),
+  http: process.env.PORT || 3000,
   https: 443
 };
 
@@ -170,8 +161,6 @@ if (false && 'production' == env) {
   });
 }
 
-var httpServer = http.createServer(app);
-
-httpServer.listen(port.http, function() {
+app.listen(port.http, function() {
   console.log('HTTP listening on port %d in %s mode', port.http, app.get('env'));
 });
