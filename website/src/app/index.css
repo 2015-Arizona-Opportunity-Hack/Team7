@@ -98,6 +98,10 @@
   position: relative;
 }
 
+.home-box-callout > img {
+  width: 120px;
+}
+
 .home-callout > img {
   position: absolute;
   top: -20px;
