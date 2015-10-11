@@ -14,7 +14,8 @@ var http = require('http'),
   bodyParser = require('body-parser'),
   favicon = require('serve-favicon'),
   errorhandler = require('errorhandler'),
-  helmet = require('helmet');
+  helmet = require('helmet'),
+  cors = require('cors');
 
 var env = process.env.NODE_ENV || 'development';
 var srcPath = __dirname + '/src';
@@ -110,6 +111,7 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 
 // Bootstrap routes/api
 var routesPath = path.join(srcPath, '/routes');
@@ -144,7 +146,7 @@ app.all('*', function(req, res) {
 
 // Start server
 var port = {
-  http: process.env.PORT || 3000,
+  http: process.env.PORT || 3010,
   https: 443
 };
 

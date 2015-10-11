@@ -21,7 +21,7 @@
       };
 
       this.$get = ['$q', function($q) {
-        var apiRegex = /^\/api\/.*/;
+        var apiRegex = /^https:\/\/limitless-chamber-3620.herokuapp.com\/api\/.*/;
         return {
           request: function(req) {
             if (apiRegex.test(req.url)) {
@@ -56,7 +56,7 @@
     //jwtInterceptorProvider.authPrefix = ''; Bearer xxx
 
     jwtInterceptorProvider.tokenGetter = ['config', 'userCache', function(config, userCache) {
-      var apiRegex = /^\/api\/.*/;
+      var apiRegex = /^https:\/\/limitless-chamber-3620.herokuapp.com\/api\/.*/;
       if (apiRegex.test(config.url)) {
         return userCache.get('jwt');
       }
