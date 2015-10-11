@@ -7,15 +7,6 @@ var config = { // dev
   port: 35674
 };
 
-if (process.env.MONGO_LOCAL === 'true') {
-  config.host = '127.0.0.1';
-  config.port = 27017;
-}
-if (process.env.NODE_ENV === 'production') {
-  config.host = 'dsXXXXXX.mongolab.com';
-  config.port = 27017;
-}
-
 var login = config.user ? config.user + ':' + encodeURIComponent(config.pw) + '@' : '';
 var uristring = 'mongodb://' + login + config.host + ':' + config.port + '/' + config.db;
 
