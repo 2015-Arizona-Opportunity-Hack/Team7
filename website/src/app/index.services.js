@@ -8,33 +8,33 @@
   /** @ngInject */
   function chandlerFoodBankApi($http) {
     this.login = function (data) {
-      return $http.post('/api/login', data);
+      return $http.post('https://limitless-chamber-3620.herokuapp.com/api/login', data);
     };
 
     this.register = function (data) {
-      return $http.post('/api/register', data);
+      return $http.post('https://limitless-chamber-3620.herokuapp.com/api/register', data);
     };
 
     this.events = {
       getAll: function () {
-        return $http.get('/api/events');
+        return $http.get('https://limitless-chamber-3620.herokuapp.com/api/events');
       },
       create: function (data) {
-        return $http.post('/api/events', data);
+        return $http.post('https://limitless-chamber-3620.herokuapp.com/api/events', data);
       },
       get: function (id) {
-        return $http.get('/api/events/' + id);
+        return $http.get('https://limitless-chamber-3620.herokuapp.com/api/events/' + id);
       }
     };
 
     this.clients = {
       getAll: function () {
-        return $http.get('/api/users', {
+        return $http.get('https://limitless-chamber-3620.herokuapp.com/api/users', {
           params: {role: 'user'}
         });
       },
       create: function (data) {
-        return $http.post('/api/users', angular.extend({}, data, {role: 'user'}));
+        return $http.post('https://limitless-chamber-3620.herokuapp.com/api/users', angular.extend({}, data, {role: 'user'}));
       }
     }
   }
