@@ -1,30 +1,33 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Module dependencies.
   var mongoose = require('mongoose'),
-  Users = mongoose.models.Users,
-  extend = require('extend'),
-  jwt = require('jsonwebtoken'),
-  secret = require('../../config/secret'),
-  auth = require('../../config/auth'),
-  routeHelper = require('../../route-helper'),
-  api = {};
+    Users = mongoose.models.Users,
+    extend = require('extend'),
+    jwt = require('jsonwebtoken'),
+    secret = require('../config/secret'),
+    auth = require('../config/auth'),
+    routeHelper = require('../route-helper'),
+    api = {};
 
-  var tokenizeUser = function(user) {
+  var tokenizeUser = function (user) {
     return {
       id: user._id,
-      email: user.email,
+      firstNsme: user.firstName,
       role: user.role
     };
   };
 
   // ALL
-  api.users = function(req, res) {
+  api.users = function (req, res) {
+    var query = {};
+    if (req.params && req.params.role) {
+      query.role = req.params.role;
+    }
 
     Users.find()
-      .populate('designs')
-      .exec(function(err, users) {
+      .exec(function (err, users) {
         if (err) {
           res.status(500).json(err);
         } else {
@@ -34,9 +37,10 @@ module.exports = function(app) {
   };
 
   // GET
-  api.user = function(req, res) {
+  api.user = function (req, res) {
+
     var id = req.params.userId;
-    Users.findOne({_id: id}, function(err, user) {
+    Users.findOne({_id: id}, function (err, user) {
       if (user) {
         if (err) {
           res.status(404).json(err);
@@ -50,14 +54,14 @@ module.exports = function(app) {
   };
 
   // POST
-  api.addUser = function(req, res) {
+  api.addUser = function (req, res) {
     if (typeof req.body.data === 'undefined') {
       res.status(500);
       return res.json({message: 'user is undefined'});
     }
 
     var user = new Users(req.body.data);
-    user.save(function(err) {
+    user.save(function (err) {
       if (!err) {
         return res.status(201).json({
           data: user
@@ -69,7 +73,7 @@ module.exports = function(app) {
   };
 
   // POST - REGISTER
-  api.registerUser = function(req, res) {
+  api.registerUser = function (req, res) {
     try {
       if (typeof req.body.data === 'undefined') {
         res.status(500);
@@ -77,7 +81,7 @@ module.exports = function(app) {
       }
 
       var user = new Users(req.body.data);
-      user.save(function(err) {
+      user.save(function (err) {
         if (!err) {
           return res.status(201).json({
             data: user.toJSON(),
@@ -96,7 +100,7 @@ module.exports = function(app) {
   };
 
   // PUT
-  api.editUser = function(req, res) {
+  api.editUser = function (req, res) {
     var id = req.params.userId;
 
     if (typeof req.body.data === 'undefined') {
@@ -108,14 +112,14 @@ module.exports = function(app) {
       return res.status(401).end();
     }
 
-    Users.findOne({_id: id}, function(err, user) {
+    Users.findOne({_id: id}, function (err, user) {
       if (err) {
         return res.status(500).json(err);
       }
 
       req.body.data._id = req.body.data.id; // Manually set the _id for now...
       if (!user) {
-        if(!routeHelper.isAdmin(req.user)){
+        if (!routeHelper.isAdmin(req.user)) {
           return res.status(401).end();
         }
         return api.addUser(req, res);
@@ -123,7 +127,7 @@ module.exports = function(app) {
 
       extend(true, user, req.body.data);
 
-      return user.save(function(err) {
+      return user.save(function (err) {
         if (!err) {
           return res.status(200).json({data: user});
         } else {
@@ -134,10 +138,10 @@ module.exports = function(app) {
   };
 
   // DELETE
-  api.deleteUser = function(req, res) {
+  api.deleteUser = function (req, res) {
     var id = req.params.userId;
-    return Users.findOne({_id: id}, function(err, user) {
-      return user.remove(function(err) {
+    return Users.findOne({_id: id}, function (err, user) {
+      return user.remove(function (err) {
         if (!err) {
           return res.send(204);
         } else {
@@ -147,8 +151,41 @@ module.exports = function(app) {
     });
   };
 
+  api.userLookup = function (req, res) {
+    if (!(req.body && req.body.data)) {
+      return res.status(401).json({message: 'User login failed'});
+    }
 
-  api.login = function(req, res) {
+    var firstName = req.body.data.firstName || '';
+    var lastName = req.body.data.lastName || '';
+    var phoneNumber = req.body.data.phoneNumber || '';
+
+    if (firstName === '' || lastName === '' || phoneNumber === '') {
+      return res.status(401).json({message: 'User login failed'});
+    }
+
+    Users.findOne({
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber
+      })
+      .exec(function (err, user) {
+        if (err || !user) {
+          return res.status(401).json({message: 'User login failed'});
+        }
+
+        var token = jwt.sign(tokenizeUser(user), secret.secretToken, {expiresInMinutes: 60 * 24});
+        return res.status(201).send({
+          data: user,
+          meta: {
+            jwt: token
+          }
+        });
+
+      });
+  };
+
+  api.login = function (req, res) {
     if (!(req.body && req.body.data)) {
       return res.status(401).json({message: 'User login failed'});
     }
@@ -160,10 +197,10 @@ module.exports = function(app) {
       return res.status(401).json({message: 'User login failed'});
     }
 
-    Users.findOne({'email': email})
-      .exec(function(err, user) {
+    Users.findOne({email: email, role: {$in: ['admin', 'employee']}})
+      .exec(function (err, user) {
         if (err || !user) {
-          return res.status(401).json({message: 'User login failed'});
+          return res.status(401).json({message: '1 User login failed'});
         }
 
         if (user.authenticate(password)) {
@@ -175,10 +212,11 @@ module.exports = function(app) {
             }
           });
         } else {
-          return res.status(401).json({message: 'User login failed'});
+          return res.status(401).json({message: '2 User login failed'});
         }
       });
   };
+
 
   app
     .get('/api/users', auth.jwtCheck, auth.isAdmin, api.users)
@@ -191,6 +229,6 @@ module.exports = function(app) {
     .post('/api/register', api.registerUser);
 
   app
-    .post('/api/login', api.login);
-
+    .post('/api/login', api.login)
+    .post('/api/login/lookup', api.userLookup);
 };

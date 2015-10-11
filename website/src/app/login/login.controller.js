@@ -6,25 +6,22 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController() {
+  function LoginController($state, authHelper) {
     var vm = this;
-    vm.profile = {};
 
-    vm.awesomeThings = [{
-      name: '1',
-      label: 'Help Get Shelter'
-    },
-      {
-        name: '2',
-        label: 'Get Food'
-      }];
+    vm.register = function() {
+      auth.register(vm.user).then(function() {
+        $state.go('dashboard');
+      });
+    };
 
-    vm.submit = function(){
-      /*
-      webService.saveProfile(vm.profile).then(function(){
-
-      })
-      */
-    }
+    vm.login = function() {
+      vm.error = null;
+      authHelper.login(vm.user).then(function() {
+        $state.go('dashboard');
+      }).catch(function() {
+        vm.error = 'Sorry no combination for that email / password';
+      });
+    };
   }
 })();

@@ -12,3 +12,36 @@
 .thumbnail img.pull-right {
   width: 50px;
 }
+
+.primary-text {
+  color: #563d7d;
+}
+.secondary-text {
+  color: #c5e9f6;
+}
+.success-text {
+  color: #546046;
+}
+
+
+.login .panel {
+  background: #c5e9f6;
+  color: #563d7d;
+  margin-top: calc(50vh - 150px);
+}
+
+.login .panel-heading {
+  color: #563d7d;
+  border-bottom: 1px solid #ccc;
+}
+
+.login .panel-heading > img {
+  width: 40px;
+}
+.login .panel-heading > h3 {
+  display: inline-block;
+}
+
+.login .panel-heading h3 {
+  margin-top: 10px;
+}

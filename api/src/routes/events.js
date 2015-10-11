@@ -5,7 +5,7 @@ module.exports = function(app) {
   var extend = require('extend'),
   mongoose = require('mongoose'),
   Events = mongoose.models.Events,
-  auth = require('../../config/auth'),
+  auth = require('../config/auth'),
   api = {};
 
   // ALL
