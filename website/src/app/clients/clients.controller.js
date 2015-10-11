@@ -21,7 +21,7 @@
       }
     };
 
-    vm.allEvents = [calendarEvents];
+    vm.allClients = [calendarEvents];
 
   }
 })();
