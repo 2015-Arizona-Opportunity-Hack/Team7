@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,7 +8,7 @@
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('main',{
+      .state('main', {
         abstract: true,
         templateUrl: 'app/templates/main.html'
       })
@@ -44,29 +44,43 @@
         url: '/seniors',
         templateUrl: 'app/seniors/seniors.html'
       })
-      .state('admin',{
+      .state('admin', {
         abstract: true,
         url: '/admin',
         templateUrl: 'app/templates/admin.html'
       })
-      .state('dashboard',{
+      .state('dashboard', {
         parent: 'admin',
         data: {requiresLogin: true},
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html'
       })
-      .state('events',{
+      .state('events', {
         abstract: true,
         parent: 'admin',
         url: '/events',
         template: '<div ui-view></div>'
       })
-      .state('events.list',{
+      .state('events.list', {
         data: {requiresLogin: true},
         url: '/events',
         templateUrl: 'app/events/events.html',
         controller: 'EventsController',
-        controllerAs: 'events'
+        controllerAs: 'events',
+        resolve: {
+          allEvents: function (chandlerFoodBankApi) {
+            try {
+              return chandlerFoodBankApi.events.getAll().then(function (res) {
+                return res.data;
+              });
+            } catch (err) {
+              console.log('err', err);
+            }
+          },
+          calendarEvents: function (allEvents, eventsHelper) {
+            return eventsHelper.eventsToCalendarEvents(allEvents);
+          }
+        }
       })
       .state('login', {
         url: '/login',

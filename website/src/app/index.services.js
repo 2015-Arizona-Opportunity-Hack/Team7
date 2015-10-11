@@ -8,15 +8,24 @@
   /** @ngInject */
   function chandlerFoodBankApi($http) {
     this.login = function (data) {
-      return $http.post('/api/login', {
-        email: data.email,
-        password: data.password
-      });
+      return $http.post('/api/login', data);
     };
 
     this.register = function (data) {
-      return $http.post('/api/register', {});
-    }
+      return $http.post('/api/register', data);
+    };
+
+    this.events = {
+      getAll: function () {
+        return $http.get('/api/events');
+      },
+      create: function (data) {
+        return $http.post('/api/events', data);
+      },
+      get: function (id) {
+        return $http.get('/api/events/' + id);
+      }
+    };
   }
 
   angular
