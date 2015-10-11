@@ -7,11 +7,6 @@
     "node": "0.10.x",
     "npm": "1.3.x"
   },
-  "scripts": {
-    "postinstall": "gulp test",
-    "test": "gulp test",
-    "start": "app.js"
-  },
   "dependencies": {
     "async": "0.9.0",
     "body-parser": "1.2.0",
