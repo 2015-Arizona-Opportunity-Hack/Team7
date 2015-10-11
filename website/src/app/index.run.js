@@ -13,7 +13,7 @@
   }
 
   /** @ngInject */
-  function routeSecurity($rootScope, $state, jwtHelper, userCache) {
+  function routeSecurity($rootScope, $state, $window, jwtHelper, userCache) {
     $rootScope.$on('$stateChangeStart', function(e, toState) {
       if (toState.data && toState.data.requiresLogin) {
         var jwt = userCache.get('jwt');
@@ -34,6 +34,7 @@
     });
 
     $rootScope.$on('$stateChangeSuccess', function(e, toState) {
+      $window.scrollTo(0,0);
       if (toState && toState.resolve) {
         // Stop spinner
       }
