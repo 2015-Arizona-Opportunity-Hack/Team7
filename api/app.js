@@ -23,7 +23,7 @@ var app = module.exports = exports.app = express();
 
 // Redirect all HTTP requests to HTTPS
 app.all('*', function(req, res, next) {
-  if (req.secure || env !== 'production') {
+  if (true || req.secure || env !== 'production') {
     // OK, continue
     return next();
   }
