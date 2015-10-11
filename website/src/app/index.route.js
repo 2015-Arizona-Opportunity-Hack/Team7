@@ -110,6 +110,11 @@
         controller: 'ClientsCreateController',
         controllerAs: 'clients'
       })
+      .state('volunteer',{
+        parent: 'main',
+        url: '/volunteer',
+        templateUrl: 'app/volunteer/volunteer.html'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'app/login/login.html',
