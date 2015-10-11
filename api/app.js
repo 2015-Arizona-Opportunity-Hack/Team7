@@ -17,7 +17,7 @@ var http = require('http'),
   helmet = require('helmet');
 
 var env = process.env.NODE_ENV || 'development';
-var srcPath = ('production' == env) ? __dirname : __dirname + '/src';
+var srcPath = (false && 'production' == env) ? __dirname : __dirname + '/src';
 
 var app = module.exports = exports.app = express();
 
