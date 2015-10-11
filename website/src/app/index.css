@@ -45,3 +45,95 @@
 .login .panel-heading h3 {
   margin-top: 10px;
 }
+
+
+.top-bar {
+  background: #107fc2;
+}
+
+.top-bar .link-group {
+  height: 43px;
+  position: relative;
+}
+
+.home-light-blue {
+  background: #c5e9f6;
+  color: #107fc2;
+}
+
+.home-dark-blue {
+  background: #107fc2;
+  color: #c5e9f6;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-40 {
+  margin-top: 40px;
+}
+
+.margin-top-100 {
+  margin-top: 100px;
+}
+
+.margin-bottom-40 {
+  margin-bottom: 40px;
+}
+
+.margin-bottom-70 {
+  margin-bottom: 70px;
+}
+
+.margin-bottom-100 {
+  margin-bottom: 100px;
+}
+
+.mid-nav-label {
+  font: 14px arial, sans serif;
+}
+
+.relative {
+  position: relative;
+}
+
+.home-callout > img {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 120px;
+}
+.home-callout-right > img {
+  left: auto;
+  right: 0;
+}
+
+.home-callout {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.home-callout-right  p {
+  text-align: right;
+}
+
+.btn-primary {
+  background: #107fc2;
+  color: #c5e9f6;
+}
+
+.btn-info {
+  background: #c5e9f6;
+  color: #107fc2;
+}
+
+.stupidfooter {
+  text-align: center;
+  font-style: italic;
+}
+
+.footpic {
+  left: 0;
+  width: 100%;
+}

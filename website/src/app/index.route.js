@@ -8,7 +8,12 @@
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('main',{
+        abstract: true,
+        templateUrl: 'app/templates/main.html'
+      })
       .state('home', {
+        parent: 'main',
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
