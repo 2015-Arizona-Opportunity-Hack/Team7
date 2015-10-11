@@ -187,20 +187,20 @@ module.exports = function (app) {
 
   api.login = function (req, res) {
     if (!(req.body && req.body.data)) {
-      return res.status(401).json({message: 'User login failed'});
+      return res.status(401).json({message: '1 User login failed'});
     }
 
     var email = req.body.data.email || '';
     var password = req.body.data.password || '';
 
     if (email === '' || password === '') {
-      return res.status(401).json({message: 'User login failed'});
+      return res.status(401).json({message: '2 User login failed'});
     }
 
     Users.findOne({email: email, role: {$in: ['admin', 'employee']}})
       .exec(function (err, user) {
         if (err || !user) {
-          return res.status(401).json({message: '1 User login failed'});
+          return res.status(401).json({message: '3 User login failed'});
         }
 
         if (user.authenticate(password)) {
@@ -212,7 +212,7 @@ module.exports = function (app) {
             }
           });
         } else {
-          return res.status(401).json({message: '2 User login failed'});
+          return res.status(401).json({message: '4 User login failed'});
         }
       });
   };
