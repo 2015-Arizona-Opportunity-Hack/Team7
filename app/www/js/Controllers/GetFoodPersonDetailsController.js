@@ -1,5 +1,5 @@
 angular.module('starter.controller.getfoodperson', ['starter.factories'])
-  .controller('GetFoodPersonDetailsController', function ($scope, eventsArr, eventsObj, dateListObj) {
+  .controller('GetFoodPersonDetailsController', function ($scope, eventsArr, eventsObj, dateListObj, $cordovaLocalNotification, $ionicModal) {
 		console.log("GetFoodPersonDetailsController");
 
 				
@@ -8,30 +8,113 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 		$scope.dateListObj = dateListObj;
 		getUserFoodEvents();
 
-		$scope.saveDay = function (week, day) {
-			var end = moment(week.start, 'YYYY-M-D').add('d', 4);
-			var dayFormatted = moment(day, 'YYYY-M-D');
+
+		$ionicModal.fromTemplateUrl('templates/getfood/getfoodeventdetails.html', function(modal) {
+			$scope.eventDetailsModal = modal;
+			}, {
+				scope: $scope
+			});
 			
+		$scope.showEventDetailsModal = function (week, day, selectedEvent) {
+			$scope.selectedEvent = selectedEvent;
+			$scope.selectedWeek = week;
+			$scope.selectedDay = day;
+			if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay || $scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
+				$scope.saveButtonText = "Remove";
+			} else {
+				$scope.saveButtonText = "Save";
+			}
+			
+			if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay) {
+				$scope.selectedEvent.remindMe = $scope.userFoodEventsObj.days[$scope.selectedWeek.end].remindMe;
+			} else if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
+				 $scope.selectedEvent.remindMe = $scope.userFoodEventsObj.days[$scope.selectedWeek.start].remindMe;
+			} else {
+				$scope.selectedEvent.remindMe = false;
+			}
+			console.log('showEventDetailsModal.remindMe', $scope.selectedEvent.remindMe);
+			$scope.eventDetailsModal.show();
+		}
+		
+		$scope.closeEventDetailsModal = function () {
+			$scope.eventDetailsModal.hide();
+		}
+		
+		$scope.saveDay = function () {
+			var remindMe = $scope.selectedEvent.remindMe === undefined ? false : $scope.selectedEvent.remindMe;	 
+			var end = moment($scope.selectedWeek.start, 'YYYY-M-D').add('d', 4);
+			var dayFormatted = moment($scope.selectedDay, 'YYYY-M-D');
 			if (end.isSame(dayFormatted)) {
 				console.log('isFriday');	
-				if ($scope.userFoodEventsObj.days[week.end]) {
-					console.log('d');
-					$scope.userFoodEventsObj.days[week.end] = null
-					delete $scope.userFoodEventsObj.days[week.end];
+				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end]) {
+					$scope.userFoodEventsObj.days[$scope.selectedWeek.end] = null
+					delete $scope.userFoodEventsObj.days[$scope.selectedWeek.end];
 				} else {
-					$scope.userFoodEventsObj.days[week.end] = day;	
+					$scope.userFoodEventsObj.days[$scope.selectedWeek.end] = {
+						'date': $scope.selectedDay,
+						'remindMe': remindMe
+					};
 				}						
 			} else {
 				console.log('is Not Friday');
-				if ($scope.userFoodEventsObj.days[week.start] == day) {
-					$scope.userFoodEventsObj.days[week.start] = null
-					delete $scope.userFoodEventsObj.days[week.start];
+				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start] == $scope.selectedDay) {
+					$scope.userFoodEventsObj.days[$scope.selectedWeek.start] = null
+					delete $scope.userFoodEventsObj.days[$scope.selectedWeek.start];
 				} else {
-					$scope.userFoodEventsObj.days[week.start] = day;	
+					$scope.userFoodEventsObj.days[$scope.selectedWeek.start] =
+					{
+						'date': $scope.selectedDay,
+						'remindMe': remindMe
+					};
 				}
 			}
 			
-			window.localStorage['foodEvents'] = angular.toJson($scope.userFoodEventsObj); 				
+			window.localStorage['foodEvents'] = angular.toJson($scope.userFoodEventsObj);
+			
+			if (ionic.Platform.isWebView()) {
+				if (remindMe) {
+					scheduleNotification(event)
+				} else {
+					removeNotification(event);
+				}
+			} 				
+			
+			$scope.eventDetailsModal.hide();
+		}
+		
+		function scheduleNotification(event) {			
+			// var alarmTime = moment.utc(event.date.start).toDate();
+			// var name = alarmTime.format('YYYY-M-D');
+			
+			//DEBUG ONLY
+			var alarmTime = new Date();
+			alarmTime.setSeconds(alarmTime.getSeconds() + 5);
+			var name = moment(alarmTime, 'YYYY-M-D').format('YYYY-M-D');
+			
+			$cordovaLocalNotification.schedule({
+				id: name,
+				date: alarmTime,
+				message: event.description,
+				title: event.name,
+				autoCancel: false,
+				sound: null
+			}).then(function () {
+				console.log("The notification has been set");
+			});
+		}
+		
+		
+		function removeNotification(event) {
+			// var alarmTime = moment.utc(event.date.start).toDate();
+			// var name = alarmTime.format('YYYY-M-D');
+			
+			//DEBUG ONLY
+			var alarmTime = new Date();
+			alarmTime.setSeconds(alarmTime.getSeconds() + 5);
+			var name = moment(alarmTime, 'YYYY-M-D').format('YYYY-M-D');			
+
+			$cordovaLocalNotification.cancel(name);
+			console.log('the notification has been removed');
 		}
 		
 		function getUserFoodEvents() {

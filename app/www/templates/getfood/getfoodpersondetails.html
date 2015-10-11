@@ -16,15 +16,15 @@
 			<div class="button-bar button-inline">
 				
 				<a class="button button-large" 
-					ng-class="{'button-balanced': (userFoodEventsObj.days[week.start] == day || userFoodEventsObj.days[week.end] == day) && eventsObj[day], 'disabled': eventsObj[day] === undefined }"
-					ng-click="saveDay(week, day)" ng-repeat="day in week.days">{{day | dateToDayShortName }}
+					ng-class="{'button-balanced': (userFoodEventsObj.days[week.start].date == day || userFoodEventsObj.days[week.end].date == day) && eventsObj[day], 'disabled': eventsObj[day] === undefined }"
+					ng-click="showEventDetailsModal(week, day, eventsObj[day])" ng-repeat="day in week.days">{{day | dateToDayShortName }}
 				</a>			
 			</div>				
 		</div>
-		<!--<pre>{{ userFoodEventsObj | json}}</pre>-->
+		<pre>{{ userFoodEventsObj | json}}</pre>
 		<!--<pre>{{ userFoodEventsObj.days | json}}</pre>-->
 		<!--<pre>{{eventsArr | json }}</pre>-->
-		<!--<pre>{{eventsObj | json }}</pre>-->
+		<pre>{{eventsObj | json }}</pre>
 		<!--<pre>{{dateListObj | json }}</pre>-->
 	</ion-content>
 </ion-view>
