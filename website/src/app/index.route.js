@@ -59,6 +59,26 @@
         url: '/eventlist',
         templateUrl: 'app/eventlist/eventlist.html'
       })
+      .state('support', {
+        parent: 'main',
+        url: '/support',
+        templateUrl: 'app/support/support.html'
+      })
+      .state('about', {
+        parent: 'main',
+        url: '/about',
+        templateUrl: 'app/about/about.html'
+      })
+      .state('contact', {
+        parent: 'main',
+        url: '/contact',
+        templateUrl: 'app/contact/contact.html'
+      })
+      .state('jobs', {
+        parent: 'main',
+        url: '/jobs',
+        templateUrl: 'app/jobs/jobs.html'
+      })
       .state('admin', {
         abstract: true,
         url: '/admin',
