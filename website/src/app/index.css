@@ -67,6 +67,10 @@
   color: #c5e9f6;
 }
 
+.margin-top-5 {
+  margin-top: 5px;
+}
+
 .margin-top-10 {
   margin-top: 10px;
 }
@@ -100,9 +104,29 @@
   position: relative;
 }
 
+.home-box-callout {
+  float: left;
+  width: 20%;
+  margin-bottom: 30px;
+}
+
+.home-box-callout > p {
+  min-height: 55px;
+}
+
 .home-box-callout > img {
   width: 120px;
 }
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .home-box-callout {
+    float: left;
+    width: 40%;
+    margin-bottom: 30px;
+  }
+}
+
 
 .home-callout > img {
   position: absolute;
@@ -150,3 +174,17 @@
   border-radius: 50%;
   border: 2px solid #ccc;
 }
+
+.nav-logo {
+  background: #fff;
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+  top: -10px;
+}
+
+.nav-logo img {
+  height: 32px;
+}
+
