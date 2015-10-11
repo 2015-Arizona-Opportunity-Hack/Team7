@@ -21,7 +21,7 @@ var env = process.env.NODE_ENV || 'development';
 var srcPath = __dirname + '/src';
 
 var app = module.exports = exports.app = express();
-
+app.use(cors());
 app.set('showStackError', true);
 
 // Should be placed before express.static
@@ -73,36 +73,6 @@ if ('production' == env) {
   }));
 }
 
-// Prevent clickjacking
-app.use(helmet.frameguard());
-
-// Implement X-XSS-Protection
-app.use(helmet.xssFilter());
-
-// Implement X-Frame: Deny
-app.use(helmet.xframe());
-
-// Keep clients from sniffing the MIME type
-app.use(helmet.noSniff());
-
-// Implement Strict-Transport-Security
-app.use(helmet.hsts({
-  maxAge: 7776000000,
-  includeSubdomains: true
-}));
-
-// Hide X-Powered-By
-app.use(helmet.hidePoweredBy());
-
-//CSP protection
-app.use(helmet.contentSecurityPolicy({
-  defaultSrc: ["'self'", 'crowdfunding.com'],
-  reportOnly: false, // set to true if you only want to report errors
-  setAllHeaders: false, // set to true if you want to set all headers
-  disableAndroid: false, // set to true if you want to disable Android (browsers can vary and be buggy)
-  safari5: false // set to true if you want to force buggy CSP in Safari 5
-}));
-
 
 // Connect to mongo db using mongoose driver
 var mongoose = require(path.join(srcPath, '/config/mongoose'));
@@ -137,16 +107,19 @@ app.use(function(err, req, res, next) {
 });
 
 app.all('*', function(req, res) {
+  console.log(req);
   if (/\/api/.test(req.url)) {
     console.error('End point not found...');
     return res.status(404).json({message: 'Endpoint was not found'});
   }
+
+
   return res.status(404).end();
 });
 
 // Start server
 var port = {
-  http: process.env.PORT || 3000,
+  http: process.env.PORT || 3010,
   https: 443
 };
 
