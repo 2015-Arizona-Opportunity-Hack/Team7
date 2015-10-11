@@ -28,10 +28,13 @@
     };
 
     this.clients = {
-      getAll: function (params) {
-        $http.get('/api/users', {
+      getAll: function () {
+        return $http.get('/api/users', {
           params: {role: 'user'}
         });
+      },
+      create: function (data) {
+        return $http.post('/api/users', angular.extend({}, data, {role: 'user'}));
       }
     }
   }
