@@ -8,11 +8,29 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 		$scope.dateListObj = dateListObj;
 		getUserFoodEvents();
 
-		$scope.saveDay = function (day) {
-			console.log("saveDay");
-			console.log(day);
-			console.log('User Food Events', $scope.userFoodEventsObj);
-			$scope.userFoodEventsObj.days[day] = day;
+		$scope.saveDay = function (week, day) {
+			var end = moment(week.start, 'M-D-YYYY').add('d', 4);
+			var dayFormatted = moment(day, 'YYYY-M-D');
+			
+			if (end.isSame(dayFormatted)) {
+				console.log('isFriday');	
+				if ($scope.userFoodEventsObj.days[week.end]) {
+					console.log('d');
+					$scope.userFoodEventsObj.days[week.end] = null
+					delete $scope.userFoodEventsObj.days[week.end];
+				} else {
+					$scope.userFoodEventsObj.days[week.end] = day;	
+				}						
+			} else {
+				console.log('is Not Friday');
+				if ($scope.userFoodEventsObj.days[week.start]) {
+					$scope.userFoodEventsObj.days[week.start] = null
+					delete $scope.userFoodEventsObj.days[week.start];
+				} else {
+					$scope.userFoodEventsObj.days[week.start] = day;	
+				}
+			}
+			
 			window.localStorage['foodEvents'] = angular.toJson($scope.userFoodEventsObj); 				
 		}
 		

@@ -10,12 +10,12 @@
 			<div>
 				<h3>{{week.start}} to {{week.end}}</h3>
 			</div>
-			<div class="button-bar">
+			<div class="button-bar button-inline">
 				
 				<a class="button button-large" 
-					ng-class="{'button-balanced': userFoodEventsObj.days[day]}"
-					ng-click="saveDay(day)" ng-repeat="day in week.days">{{day | dateToDayShortName }}
-					</a>			
+					ng-class="{'button-balanced': userFoodEventsObj.days[week.start] == day || userFoodEventsObj.days[week.end] == day}"
+					ng-click="saveDay(week, day)" ng-repeat="day in week.days">{{day | dateToDayShortName }}
+				</a>			
 			</div>				
 		</div>
 		<pre>{{ userFoodEventsObj | json}}</pre>
