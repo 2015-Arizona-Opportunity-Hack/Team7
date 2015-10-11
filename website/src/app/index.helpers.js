@@ -6,11 +6,12 @@
     .service('authHelper', authHelper);
 
   /** @ngInject */
-  function authHelper($q, userCache, userHttpCache, chandlerFoodBankApi) {
+  function authHelper($rootScope, $q, userCache, userHttpCache, chandlerFoodBankApi) {
     var storeSession = function(res) {
       try {
         userCache.put('user', res.data);
         userCache.put('jwt', res.meta.jwt);
+        $rootScope.user = res.data;
         return null;
       } catch (err) {
         return $q.reject('unable to save the user to local storage!');

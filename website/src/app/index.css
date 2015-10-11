@@ -137,3 +137,9 @@
   left: 0;
   width: 100%;
 }
+
+.user-avatar {
+  width: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}

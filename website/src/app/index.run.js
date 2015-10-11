@@ -3,8 +3,14 @@
 
   angular
     .module('website')
+    .run(restoreFromCache)
     .run(routeSecurity)
     .run(runBlock);
+
+  /** @ngInject */
+  function restoreFromCache($rootScope, userCache) {
+    $rootScope.user = userCache.get('user');
+  }
 
   /** @ngInject */
   function routeSecurity($rootScope, $state, jwtHelper, userCache) {
