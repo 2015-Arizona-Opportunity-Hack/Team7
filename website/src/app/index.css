@@ -60,6 +60,10 @@
   color: #fff;
 }
 
+.navbar-default .navbar-toggle {
+  background-color: #fff;
+}
+
 .top-bar .link-group {
   height: 43px;
   position: relative;
@@ -126,14 +130,6 @@
   width: 120px;
 }
 
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-  .home-box-callout {
-    float: left;
-    width: 40%;
-    margin-bottom: 30px;
-  }
-}
 
 
 .home-callout > img {
@@ -196,3 +192,15 @@
   height: 32px;
 }
 
+/* Small Devices, Tablets */
+@media screen and (max-width: 767px) {
+  .home-box-callout {
+    float: left;
+    width: 40%;
+    margin-bottom: 30px;
+  }
+
+  .home-callout > img {
+    position: relative;
+  }
+}
