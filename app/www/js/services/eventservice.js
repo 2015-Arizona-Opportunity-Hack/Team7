@@ -117,9 +117,7 @@ angular.module('starter.factories', [])
 		return service;
 
 		function all() {
-			console.log("events.all");
 			var eventsDb = eventsFromDbHardCoded;
-			
 			
 			return eventsDb;
 		}
@@ -138,9 +136,7 @@ angular.module('starter.factories', [])
 		angular.forEach(eventsArr, function (data) {
 				var date = moment(data.date.start).format('YYYY-M-D');
 				eventsObj[date] = data;
-				console.log(eventsObj[date]);						
 			});					
-		console.log(eventsObj);
 			
 		return eventsObj;
 	}
@@ -157,7 +153,6 @@ angular.module('starter.factories', [])
 					'days': []
 				};
 				for (var dayIndex = 0; dayIndex < 5; dayIndex++){
-					console.log(begin.format('YYYY-M-D'));
 					weekObj[index].days.push(begin.format('YYYY-M-D'));
 					begin.add('d', 1);					
 				}
@@ -166,9 +161,6 @@ angular.module('starter.factories', [])
 				 
 		}
 		
-		console.log(weekObj);
 		return weekObj;	
-	}
-	
-		
+	}		
 })

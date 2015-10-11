@@ -11,9 +11,15 @@
 				<h3>{{week.start}} to {{week.end}}</h3>
 			</div>
 			<div class="button-bar">
-				<a class="button button-large" ng-repeat="day in week.days">{{day | dateToDayShortName }}</a>			
+				
+				<a class="button button-large" 
+					ng-class="{'button-balanced': userFoodEventsObj.days[day]}"
+					ng-click="saveDay(day)" ng-repeat="day in week.days">{{day | dateToDayShortName }}
+					</a>			
 			</div>				
 		</div>
+		<pre>{{ userFoodEventsObj | json}}</pre>
+		<pre>{{ userFoodEventsObj.days | json}}</pre>
 		<pre>{{eventsArr | json }}</pre>
 		<pre>{{eventsObj | json }}</pre>
 		<pre>{{dateListObj | json }}</pre>
