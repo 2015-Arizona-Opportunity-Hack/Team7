@@ -19,6 +19,31 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .state('foodbank', {
+        parent: 'main',
+        url: '/foodbank',
+        templateUrl: 'app/foodbank/foodbank.html'
+      })
+      .state('family', {
+        parent: 'main',
+        url: '/family',
+        templateUrl: 'app/family/family.html'
+      })
+      .state('community', {
+        parent: 'main',
+        url: '/community',
+        templateUrl: 'app/community/community.html'
+      })
+      .state('ihelp', {
+        parent: 'main',
+        url: '/ihelp',
+        templateUrl: 'app/ihelp/ihelp.html'
+      })
+      .state('seniors', {
+        parent: 'main',
+        url: '/seniors',
+        templateUrl: 'app/seniors/seniors.html'
+      })
       .state('admin',{
         abstract: true,
         url: '/admin',

@@ -91,7 +91,8 @@
 }
 
 .mid-nav-label {
-  font: 14px arial, sans serif;
+  margin-top: 10px;
+  font: 18px arial, sans serif;
 }
 
 .relative {
@@ -118,7 +119,7 @@
   margin-bottom: 40px;
 }
 
-.home-callout-right  p {
+.home-callout-right {
   text-align: right;
 }
 
