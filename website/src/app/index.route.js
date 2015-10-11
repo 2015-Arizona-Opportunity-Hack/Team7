@@ -30,6 +30,19 @@
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html'
       })
+      .state('events',{
+        abstract: true,
+        parent: 'admin',
+        url: '/events',
+        template: '<div ui-view></div>'
+      })
+      .state('events.list',{
+        data: {requiresLogin: true},
+        url: '/events',
+        templateUrl: 'app/events/events.html',
+        controller: 'EventsController',
+        controllerAs: 'events'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'app/login/login.html',
