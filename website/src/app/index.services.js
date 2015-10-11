@@ -26,6 +26,14 @@
         return $http.get('/api/events/' + id);
       }
     };
+
+    this.clients = {
+      getAll: function (params) {
+        $http.get('/api/users', {
+          params: {role: 'user'}
+        });
+      }
+    }
   }
 
   angular

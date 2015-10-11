@@ -22,11 +22,11 @@ module.exports = function (app) {
   // ALL
   api.users = function (req, res) {
     var query = {};
-    if (req.params && req.params.role) {
-      query.role = req.params.role;
+    if (req.query && req.query.role) {
+      query.role = req.query.role;
     }
 
-    Users.find()
+    Users.find(query)
       .exec(function (err, users) {
         if (err) {
           res.status(500).json(err);
@@ -219,7 +219,7 @@ module.exports = function (app) {
 
 
   app
-    .get('/api/users', auth.jwtCheck, auth.isAdmin, api.users)
+    .get('/api/users', auth.jwtCheck, auth.isEmployeeOrAdmin, api.users)
     .get('/api/users/:userId', auth.jwtCheck, auth.isMongoId, api.user)
     .post('/api/users', auth.jwtCheck, api.addUser)
     .put('/api/users/:userId', auth.jwtCheck, auth.isMongoId, api.editUser)

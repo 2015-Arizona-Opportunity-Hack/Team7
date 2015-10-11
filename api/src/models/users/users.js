@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function() {
+module.exports = function () {
   var mongoose = require('mongoose'),
     extendSchema = require('mongoose-schema-extend'),
     Schema = mongoose.Schema,
@@ -9,7 +9,7 @@ module.exports = function() {
     crypto = require('crypto'),
     _ = require('lodash');
 
-  var validatePresenceOf = function(value) {
+  var validatePresenceOf = function (value) {
     // If you are authenticating by any of the oauth strategies, don't validate.
     return (this.provider && this.provider !== 'local') || (value && value.length);
   };
@@ -37,7 +37,7 @@ module.exports = function() {
     },
     role: {
       type: String,
-      enum: ['admin','employee','user'],
+      enum: ['admin', 'employee', 'user'],
       default: 'user'
     },
     hashedPassword: {
@@ -58,22 +58,22 @@ module.exports = function() {
 
   var UsersSchema = BaseSchema.extend(fields, {strict: true});
 
-  UsersSchema.virtual('password').set(function(password) {
+  UsersSchema.virtual('password').set(function (password) {
     this._password = password;
     this.salt = this.makeSalt();
     this.hashedPassword = this.hashPassword(password);
-  }).get(function() {
+  }).get(function () {
     return this._password;
   });
 
   UsersSchema.methods = {
-    authenticate: function(plainText) {
+    authenticate: function (plainText) {
       return this.hashPassword(plainText) === this.hashedPassword;
     },
-    makeSalt: function() {
+    makeSalt: function () {
       return crypto.randomBytes(16).toString('base64');
     },
-    hashPassword: function(password) {
+    hashPassword: function (password) {
       if (!password || !this.salt) return '';
       var salt = new Buffer(this.salt, 'base64');
       return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
@@ -81,7 +81,8 @@ module.exports = function() {
   };
 
   UsersSchema.set('toJSON', {
-    transform: function(doc, ret, options) {
+    virtuals: true,
+    transform: function (doc, ret, options) {
       delete ret.password;
       delete ret.hashedPassword;
       delete ret.salt;
