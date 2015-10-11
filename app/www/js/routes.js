@@ -22,7 +22,18 @@ angular.module('starter.routes', [])
 		  views: {
 			  'menuContent': {
 				  templateUrl: 'templates/getfood/getfoodpersondetails.html',
-				  controller: 'GetFoodPersonDetailsController'
+				  controller: 'GetFoodPersonDetailsController',
+				  resolve: {
+					  eventsArr: function (events) {
+							  return events.all();						  
+					  },
+					  eventsObj: function (eventsArr, eventsHelper) {
+						  return eventsHelper.convertToDateMappedObj(eventsArr);
+					  },
+					  dateListObj: function (eventsHelper) {
+						  return eventsHelper.getDateList();
+					  }
+				  }
 			  }
 		  }
 	  })
@@ -49,9 +60,7 @@ angular.module('starter.routes', [])
 		  views: {
 			  'menuContent': {
 				  templateUrl: 'templates/getfood/getfoodeventdetails.html',
-				  controller: 'GetFoodEventDetailsController'
-				  
-				
+				  controller: 'GetFoodEventDetailsController'				
 			}
 		}
 	  });
