@@ -106,12 +106,12 @@ app.use(helmet.contentSecurityPolicy({
 
 // Connect to mongo db using mongoose driver
 var mongoose = require(path.join(srcPath, '/config/mongoose'));
-
+app.use(cors());
 app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors());
+
 
 // Bootstrap routes/api
 var routesPath = path.join(srcPath, '/routes');
@@ -146,7 +146,7 @@ app.all('*', function(req, res) {
 
 // Start server
 var port = {
-  http: process.env.PORT || 3000,
+  http: process.env.PORT || 3010,
   https: 443
 };
 
