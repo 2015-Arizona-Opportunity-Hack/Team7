@@ -21,7 +21,8 @@ angular.module('starter.routes', [])
 		  url: '/getfooddetails',
 		  views: {
 			  'menuContent': {
-				  templateUrl: 'templates/getfood/getfoodpersondetails.html'
+				  templateUrl: 'templates/getfood/getfoodpersondetails.html',
+				  controller: 'GetFoodPersonDetailsController'
 			  }
 		  }
 	  })
@@ -42,7 +43,19 @@ angular.module('starter.routes', [])
           controller: 'HomeController'
         }
       }
-    });
+    })
+	  .state('app.getfoodeventdetails', {
+		  url: '/getfoodeventdetails/:id',
+		  views: {
+			  'menuContent': {
+				  templateUrl: 'templates/getfood/getfoodeventdetails.html',
+				  controller: 'GetFoodEventDetailsController'
+				  
+				
+			}
+		}
+	  });
+	
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });

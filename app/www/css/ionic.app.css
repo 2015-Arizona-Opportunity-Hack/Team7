@@ -15,6 +15,14 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+/**
+ * Button Bar
+ * --------------------------------------------------
+ */
+.button-bar > .button-large:before,
+.button-bar > .button-large .icon:before {
+  line-height: 100px; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

@@ -3,6 +3,8 @@ angular.module
 	'starter.controllers',
 	[
 		'starter.controller.home',
-		'starter.controller.app'
+		'starter.controller.app',
+		'starter.controller.getfood',
+		'starter.controller.getfoodperson'
 	]
 );
