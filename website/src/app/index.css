@@ -96,6 +96,12 @@
   color: #c5e9f6;
 }
 
+.panel > .panel-heading-dark-green {
+ 	background-image: none;
+  background-color: #18a55e;
+  color: #c5e9f6;
+}
+
 .panel > .panel-heading-dark-blue {
  	background-image: none;
    background: #107fc2;
