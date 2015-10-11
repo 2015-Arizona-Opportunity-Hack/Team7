@@ -3,10 +3,10 @@
 
   angular
     .module('website')
-    .controller('MainController', MainController);
+    .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function MainController($timeout) {
+  function HomeController() {
     var vm = this;
   }
 })();

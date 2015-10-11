@@ -15,9 +15,9 @@
       .state('home', {
         parent: 'main',
         url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: 'app/home/home.html',
+        controller: 'HomeController',
+        controllerAs: 'home'
       })
       .state('foodbank', {
         parent: 'main',
