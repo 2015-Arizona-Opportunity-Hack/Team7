@@ -1,5 +1,5 @@
 'use strict';
-
+console.log('TOP OF FILE=============================');
 // Module dependencies.
 var http = require('http'),
   https = require('https'),
@@ -157,7 +157,7 @@ var port = {
   https: 443
 };
 
-if ('production' == env) {
+if (false && 'production' == env) {
   var options = {
     key: fs.readFileSync(path.join(srcPath, '.tmp/ssl/chandlerfoodbank.org/private.key')),
     cert: fs.readFileSync(path.join(srcPath, '.tmp/ssl/chandlerfoodbank.org/ssl.pem'))
