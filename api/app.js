@@ -24,6 +24,8 @@ var app = module.exports = exports.app = express();
 
 app.set('showStackError', true);
 
+
+
 // Should be placed before express.static
 // To ensure that all assets and data are compressed (utilize bandwidth)
 //app.use(compression({
@@ -107,8 +109,19 @@ models.forEach(function (file) {
 // Connect to mongo db using mongoose driver
 var mongoose = require(path.join(srcPath, '/config/mongoose'));
 app.use(cors());
+
+app.use(function (req, res, next) {
+  console.log(req.body) // populated!
+  next();
+});
+
 app.use(methodOverride());
 app.use(bodyParser.json({extended:true}));
+app.use(function (req, res, next) {
+  console.log(req.body) // populated!
+  next();
+});
+
 //app.use(expressValidator());
 
 
