@@ -24,6 +24,16 @@
         url: '/foodbank',
         templateUrl: 'app/foodbank/foodbank.html'
       })
+      .state('donatefood', {
+        parent: 'main',
+        url: '/donatefood',
+        templateUrl: 'app/donate/donatefood.html'
+      })
+	  .state('donatemoney', {
+        parent: 'main',
+        url: '/donatemoney',
+        templateUrl: 'app/donate/donatemoney.html'
+      })
       .state('family', {
         parent: 'main',
         url: '/family',

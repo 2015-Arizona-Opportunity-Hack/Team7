@@ -153,6 +153,11 @@
   text-align: right;
 }
 
+.label-outline {
+	background: white;
+	color: black;
+}
+
 .btn-primary {
   background: #107fc2;
   color: #c5e9f6;
