@@ -1,6 +1,6 @@
-angular.module('starter.controller.getfoodperson', ['starter.factories'])
-  .controller('GetFoodPersonDetailsController', function ($scope, eventsArr, eventsObj, dateListObj, $cordovaLocalNotification, $ionicModal) {
-		console.log("GetFoodPersonDetailsController");
+angular.module('starter.controller.foodbankperson', ['starter.factories'])
+  .controller('FoodBankPersonDetailsController', function ($scope, eventsArr, eventsObj, dateListObj, $cordovaLocalNotification, $ionicModal) {
+		console.log("FoodBankPersonDetailsController");
 
 				
 		$scope.eventsArr = eventsArr;
@@ -9,7 +9,7 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 		getUserFoodEvents();
 
 
-		$ionicModal.fromTemplateUrl('templates/getfood/getfoodeventdetails.html', function(modal) {
+		$ionicModal.fromTemplateUrl('templates/food_bank/food_bank_event_details.html', function(modal) {
 			$scope.eventDetailsModal = modal;
 			}, {
 				scope: $scope
@@ -19,15 +19,17 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 			$scope.selectedEvent = selectedEvent;
 			$scope.selectedWeek = week;
 			$scope.selectedDay = day;
-			if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay || $scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
+			$scope.saveButtonText = "Save";
+			
+			if (($scope.userFoodEventsObj.days[$scope.selectedWeek.end] !== undefined && $scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay) || ($scope.userFoodEventsObj.days[$scope.selectedWeek.start] !== undefined) && $scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
 				$scope.saveButtonText = "Remove";
-			} else {
-				$scope.saveButtonText = "Save";
 			}
 			
-			if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay) {
+			if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end]  !== undefined
+					&& $scope.userFoodEventsObj.days[$scope.selectedWeek.end].date == $scope.selectedDay) {
 				$scope.selectedEvent.remindMe = $scope.userFoodEventsObj.days[$scope.selectedWeek.end].remindMe;
-			} else if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
+			} else if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start] !== undefined
+					&& $scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
 				 $scope.selectedEvent.remindMe = $scope.userFoodEventsObj.days[$scope.selectedWeek.start].remindMe;
 			} else {
 				$scope.selectedEvent.remindMe = false;
@@ -46,7 +48,7 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 			var dayFormatted = moment($scope.selectedDay, 'YYYY-M-D');
 			if (end.isSame(dayFormatted)) {
 				console.log('isFriday');	
-				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end]) {
+				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.end] !== undefined && $scope.userFoodEventsObj.days[$scope.selectedWeek.end].date) {
 					$scope.userFoodEventsObj.days[$scope.selectedWeek.end] = null
 					delete $scope.userFoodEventsObj.days[$scope.selectedWeek.end];
 				} else {
@@ -57,8 +59,8 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 				}						
 			} else {
 				console.log('is Not Friday');
-				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start] == $scope.selectedDay) {
-					$scope.userFoodEventsObj.days[$scope.selectedWeek.start] = null
+				if ($scope.userFoodEventsObj.days[$scope.selectedWeek.start] !== undefined && $scope.userFoodEventsObj.days[$scope.selectedWeek.start].date == $scope.selectedDay) {
+					$scope.userFoodEventsObj.days[$scope.selectedWeek.start].date = null
 					delete $scope.userFoodEventsObj.days[$scope.selectedWeek.start];
 				} else {
 					$scope.userFoodEventsObj.days[$scope.selectedWeek.start] =

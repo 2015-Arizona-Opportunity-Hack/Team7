@@ -4,7 +4,7 @@ angular.module
 	[
 		'starter.controller.home',
 		'starter.controller.app',
-		'starter.controller.getfood',
-		'starter.controller.getfoodperson'
+		'starter.controller.foodbank',
+		'starter.controller.foodbankperson'
 	]
 );

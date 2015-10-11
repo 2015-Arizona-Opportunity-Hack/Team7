@@ -36,7 +36,7 @@ angular.module('starter.controller.app', [])
     // code if using a login system
     $timeout(function () {
 		$scope.closeLogin();
-  		$state.go("app.getfoodpersondetails");
+  		$state.go("app.foodbankpersondetails");
     }, 1000);
   };
 })

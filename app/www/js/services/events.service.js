@@ -1,4 +1,4 @@
-angular.module('starter.factories', [])
+	angular.module('starter.factories', [])
 .factory('events', function ($http, $q) {
 		var service = {
 			all: all,
@@ -143,6 +143,25 @@ angular.module('starter.factories', [])
 	
 	function getDateList() {
 		var weekObj = {};
+		var now = moment();
+		var firstDay = now.startOf('month');
+		var endDay = firstDay.clone().endOf('month');
+		console.log('startDate', firstDay);
+		console.log('endDate', endDay);
+		//# Create a range for the month we can iterate through
+		var monthRange = moment.range(firstDay, endDay)
+		
+		//# Get all the weeks during the current month
+		var weeks = {};
+		monthRange.by('days', function (moment) {
+			if (weeks[moment.week()] === undefined)
+				weeks[moment.week()] = {
+					'week': moment.week(),
+					'start': moment.startOf('isoweek')
+				};
+		});
+		
+		console.log('weeks', weeks);
 		for (var index = 0; index < 4; index++) {
 			var week = moment().add('w', index),
 				begin = week.startOf('isoweek');

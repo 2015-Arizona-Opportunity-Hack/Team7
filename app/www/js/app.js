@@ -11,7 +11,9 @@ angular.module('starter',
 		'starter.routes',
 		'starter.factories',
 		'starter.filters',
-		'ngCordova'
+		'ngCordova',
+		'angular-jwt',
+		'angular-cache'
 	])
 
 	.run(function ($ionicPlatform, $rootScope) {
