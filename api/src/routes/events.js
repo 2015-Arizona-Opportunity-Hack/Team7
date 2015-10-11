@@ -47,7 +47,7 @@ module.exports = function(app) {
     event.save(function(err) {
       if (!err) {
         return res.status(201).json({
-          data: event.toObject()
+          data: event
         });
       } else {
         return res.status(500).json(err);
@@ -98,7 +98,7 @@ module.exports = function(app) {
 
   app.get('/api/events', api.events);
   app.get('/api/events/:eventId', api.event);
-  app.post('/api/events', auth.jwtCheck, api.addEvent);
-  app.put('/api/events/:eventId', auth.jwtCheck, api.editEvent);
-  app.delete('/api/events/:eventId', auth.jwtCheck, api.deleteEvent);
+  app.post('/api/events', auth.jwtCheck, auth.isEmployeeOrAdmin, api.addEvent);
+  app.put('/api/events/:eventId', auth.jwtCheck, auth.isEmployeeOrAdmin, api.editEvent);
+  app.delete('/api/events/:eventId', auth.jwtCheck, auth.isEmployeeOrAdmin, api.deleteEvent);
 };
