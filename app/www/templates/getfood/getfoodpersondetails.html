@@ -6,6 +6,9 @@
 				<h2>Marty McFly</h2>
 			</div>			
 		</div>
+		<div class="item item-text-wrap">
+			Rules: Each week you may get food once Monday through Thursday and then again on Friday.
+		</div>
 		<div class="item" ng-repeat="week in dateListObj">
 			<div>
 				<h3>{{week.start}} to {{week.end}}</h3>
@@ -13,15 +16,15 @@
 			<div class="button-bar button-inline">
 				
 				<a class="button button-large" 
-					ng-class="{'button-balanced': userFoodEventsObj.days[week.start] == day || userFoodEventsObj.days[week.end] == day}"
+					ng-class="{'button-balanced': (userFoodEventsObj.days[week.start] == day || userFoodEventsObj.days[week.end] == day) && eventsObj[day], 'disabled': eventsObj[day] === undefined }"
 					ng-click="saveDay(week, day)" ng-repeat="day in week.days">{{day | dateToDayShortName }}
 				</a>			
 			</div>				
 		</div>
-		<pre>{{ userFoodEventsObj | json}}</pre>
-		<pre>{{ userFoodEventsObj.days | json}}</pre>
-		<pre>{{eventsArr | json }}</pre>
-		<pre>{{eventsObj | json }}</pre>
-		<pre>{{dateListObj | json }}</pre>
+		<!--<pre>{{ userFoodEventsObj | json}}</pre>-->
+		<!--<pre>{{ userFoodEventsObj.days | json}}</pre>-->
+		<!--<pre>{{eventsArr | json }}</pre>-->
+		<!--<pre>{{eventsObj | json }}</pre>-->
+		<!--<pre>{{dateListObj | json }}</pre>-->
 	</ion-content>
 </ion-view>

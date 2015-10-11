@@ -148,7 +148,7 @@ angular.module('starter.factories', [])
 				begin = week.startOf('isoweek');
 				
 				weekObj[index] = {
-					'start': begin.format('M-D-YYYY'),
+					'start': begin.format('YYYY-M-D'),
 				
 					'days': []
 				};
@@ -157,7 +157,7 @@ angular.module('starter.factories', [])
 					begin.add('d', 1);					
 				}
 				
-				weekObj[index].end = begin.format('M-D-YYYY');
+				weekObj[index].end = begin.format('YYYY-M-D');
 				 
 		}
 		

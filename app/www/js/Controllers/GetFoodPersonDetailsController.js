@@ -9,7 +9,7 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 		getUserFoodEvents();
 
 		$scope.saveDay = function (week, day) {
-			var end = moment(week.start, 'M-D-YYYY').add('d', 4);
+			var end = moment(week.start, 'YYYY-M-D').add('d', 4);
 			var dayFormatted = moment(day, 'YYYY-M-D');
 			
 			if (end.isSame(dayFormatted)) {
@@ -23,7 +23,7 @@ angular.module('starter.controller.getfoodperson', ['starter.factories'])
 				}						
 			} else {
 				console.log('is Not Friday');
-				if ($scope.userFoodEventsObj.days[week.start]) {
+				if ($scope.userFoodEventsObj.days[week.start] == day) {
 					$scope.userFoodEventsObj.days[week.start] = null
 					delete $scope.userFoodEventsObj.days[week.start];
 				} else {
