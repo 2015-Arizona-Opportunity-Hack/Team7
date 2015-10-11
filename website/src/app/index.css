@@ -48,6 +48,10 @@
 }
 
 .navbar-nav > li > .dropdown-menu img {
+  width: 48px;
+}
+
+.nav.navbar-nav > li > a > img{
   width: 24px;
 }
 
@@ -126,11 +130,15 @@
   min-height: 55px;
 }
 
-.home-box-callout  img {
+.home-box-callout img {
   width: 120px;
 }
 
 
+.home-callout {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
 
 .home-callout > img {
   position: absolute;
@@ -139,19 +147,15 @@
   width: 120px;
 }
 
+.home-callout-right {
+  text-align: right;
+}
+
 .home-callout-right > img {
   left: auto;
   right: 0;
 }
 
-.home-callout {
-  margin-top: 60px;
-  margin-bottom: 40px;
-}
-
-.home-callout-right {
-  text-align: right;
-}
 
 .label-outline {
 	background: white;
@@ -201,11 +205,25 @@
 @media screen and (max-width: 767px) {
   .home-box-callout {
     float: left;
-    width: 40%;
+    width: 50%;
     margin-bottom: 30px;
   }
 
   .home-callout > img {
     position: relative;
+  }
+}
+
+@media (min-width : 480px) and (max-width : 767px) {
+  .home-box-callout:nth-child(5) {
+    margin-left: 50%;
+    left: -25%;
+    position: relative;
+  }
+}
+@media only screen and (max-width : 480px) {
+  .home-box-callout {
+    float: none;
+    width: 100%;
   }
 }
