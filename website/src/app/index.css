@@ -16,13 +16,14 @@
 .primary-text {
   color: #563d7d;
 }
+
 .secondary-text {
   color: #c5e9f6;
 }
+
 .success-text {
   color: #546046;
 }
-
 
 .login .panel {
   background: #c5e9f6;
@@ -38,6 +39,7 @@
 .login .panel-heading > img {
   width: 40px;
 }
+
 .login .panel-heading > h3 {
   display: inline-block;
 }
@@ -45,7 +47,6 @@
 .login .panel-heading h3 {
   margin-top: 10px;
 }
-
 
 .top-bar {
   background: #107fc2;
@@ -109,6 +110,7 @@
   left: 0;
   width: 120px;
 }
+
 .home-callout-right > img {
   left: auto;
   right: 0;
