@@ -6,12 +6,13 @@
     .controller('ClientsCreateController', ClientsCreateController);
 
   /** @ngInject */
-  function ClientsCreateController() {
+  function ClientsCreateController($state, chandlerFoodBankApi) {
     var vm = this;
 
-    vm.save = function (chandlerFoodBankApi) {
-      chandlerFoodBankApi.clients.create(vm.clients);
-
+    vm.save = function () {
+      chandlerFoodBankApi.clients.create(vm.user).then(function(){
+        $state.go('dashboard');
+      });
     };
   }
 })();

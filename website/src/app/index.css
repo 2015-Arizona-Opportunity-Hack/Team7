@@ -48,7 +48,7 @@
 }
 
 .navbar-nav > li > .dropdown-menu img {
-  width: 48px;
+  width: 24px;
 }
 
 .nav.navbar-nav > li > a > img{
@@ -86,8 +86,21 @@
 }
 
 .home-dark-blue {
-  background: #107fc2;
+ background-image: none;
+   background: #107fc2;
   color: #c5e9f6;
+}
+
+.panel > .panel-heading-dark-blue {
+ 	background-image: none;
+   background: #107fc2;
+  color: #c5e9f6;
+}
+
+.panel-default > .panel-heading-light-blue {
+ 	background-image: none !important;
+	background: #c5e9f6 !important;
+    color: #107fc2 !important;
 }
 
 .margin-top-5 {
@@ -108,6 +121,10 @@
 
 .margin-bottom-10 {
   margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
 }
 
 .margin-bottom-40 {
